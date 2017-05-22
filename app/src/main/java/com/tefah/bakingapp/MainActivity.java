@@ -1,6 +1,7 @@
 package com.tefah.bakingapp;
 
 import android.app.LoaderManager;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
@@ -11,10 +12,13 @@ import android.util.DisplayMetrics;
 
 import com.tefah.bakingapp.pojo.Recipe;
 
+import org.parceler.Parcels;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements LoaderManager.LoaderCallbacks<List<Recipe>>{
+        implements LoaderManager.LoaderCallbacks<List<Recipe>>,
+        RecipeAdapter.OnRecipeClick{
 
     public static final int LOADER_ID   = 1;
     public static final int TABLET_DPI  = 600;
@@ -41,7 +45,7 @@ public class MainActivity extends AppCompatActivity
             layoutManager = new GridLayoutManager(this, 1);
         recipesRecyclerView.setLayoutManager(layoutManager);
         recipesRecyclerView.setHasFixedSize(true);
-        adapter = new RecipeAdapter(this, null);
+        adapter = new RecipeAdapter(this, null, this);
         recipesRecyclerView.setAdapter(adapter);
 
         getLoaderManager().initLoader(LOADER_ID, null, this);
@@ -61,5 +65,12 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onLoaderReset(Loader<List<Recipe>> loader) {
         loader.forceLoad();
+    }
+
+    @Override
+    public void onClick(Recipe recipe) {
+        Intent intent = new Intent(MainActivity.this, RecipeDetailesActivity.class);
+        intent.putExtra("recipe", Parcels.wrap(recipe));
+        startActivity(intent);
     }
 }

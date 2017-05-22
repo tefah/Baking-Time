@@ -1,10 +1,12 @@
 package com.tefah.bakingapp.pojo;
 
+import java.io.Serializable;
+
 /**
  * POJO class to hold a recipe step
  */
 
-public class Step {
+public class Step implements Serializable {
 
     private int id;
     private String shortDescription, description, videoUrl;

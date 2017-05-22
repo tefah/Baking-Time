@@ -1,10 +1,12 @@
 package com.tefah.bakingapp.pojo;
 
+import java.io.Serializable;
+
 /**
  * POJO to hold an ingredient's content
  */
 
-public class Ingredient {
+public class Ingredient implements Serializable{
     private int quantity;
     private String ingredientName, measure;
 

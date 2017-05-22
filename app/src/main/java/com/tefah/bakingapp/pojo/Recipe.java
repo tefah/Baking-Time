@@ -1,17 +1,24 @@
 package com.tefah.bakingapp.pojo;
 
+import org.parceler.Parcel;
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * POJO class to hold a recipe content
  */
 
+@Parcel
 public class Recipe {
 
-    private int id, servings;
-    private String name, imageUrl;
-    private List<Step> steps;
-    private List<Ingredient> ingredients;
+    int id, servings;
+    String name, imageUrl;
+    List<Step> steps;
+    List<Ingredient> ingredients;
+
+    // empty constructor for parceler library
+    public Recipe(){}
 
     public Recipe(int id, int servings, String name, String imageUrl,
                   List<Step> steps, List<Ingredient> ingredients){
