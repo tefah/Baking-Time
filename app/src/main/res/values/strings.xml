@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">BakingApp</string>
 
+    <!--strings for buttons in the display activity-->
+    <string name="prevButton">Previous</string>
+    <string name="nextButton">Next</string>
+
 </resources>
