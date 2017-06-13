@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(Recipe recipe) {
         Intent intent = new Intent(MainActivity.this, RecipeDetailsActivity.class);
-        intent.putExtra("recipe", Parcels.wrap(recipe));
+        intent.putExtra(String.valueOf(R.string.recipeKey), Parcels.wrap(recipe));
         startActivity(intent);
     }
 }

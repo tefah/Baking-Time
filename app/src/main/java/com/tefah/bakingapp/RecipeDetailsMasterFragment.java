@@ -68,8 +68,8 @@ public class RecipeDetailsMasterFragment extends Fragment implements StepAdapter
     }
 
     @Override
-    public void onClick(Step step) {
+    public void onClick(Step step, int position) {
         Toast.makeText(getContext(), step.getShortDescription(), Toast.LENGTH_SHORT).show();
-        ((RecipeDetailsActivity)getActivity()).setStep(step);
+        ((RecipeDetailsActivity)getActivity()).setStep(step, position);
     }
 }

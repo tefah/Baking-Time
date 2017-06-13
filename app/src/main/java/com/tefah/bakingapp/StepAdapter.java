@@ -20,7 +20,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepViewHolder
     private OnStepClick clickListner;
 
     public interface OnStepClick{
-        public void onClick(Step step);
+        public void onClick(Step step, int position);
     }
 
     public StepAdapter(List<Step> steps, OnStepClick clickListner){
@@ -68,6 +68,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepViewHolder
     public class StepViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         Step step;
+        int position;
 
         public StepViewHolder(View itemView) {
             super(itemView);
@@ -75,6 +76,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepViewHolder
         }
 
         public void bind(int position){
+            this.position = position;
             step = steps.get(position);
             ((TextView) itemView.findViewById(R.id.stepDescriptionTextView))
                     .setText(step.getShortDescription());
@@ -82,7 +84,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepViewHolder
 
         @Override
         public void onClick(View view) {
-            clickListner.onClick(step);
+            clickListner.onClick(step, position);
         }
     }
 }

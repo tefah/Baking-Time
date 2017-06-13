@@ -45,7 +45,10 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.upstream.TransferListener;
 import com.google.android.exoplayer2.util.Util;
+import com.tefah.bakingapp.pojo.Recipe;
 import com.tefah.bakingapp.pojo.Step;
+
+import org.parceler.Parcels;
 
 import java.io.IOException;
 
@@ -58,7 +61,9 @@ import butterknife.ButterKnife;
 
 public class StepDetailFragment extends Fragment implements ExoPlayer.EventListener{
 
+    private Recipe recipe;
     private Step step;
+    private int position;
     private SimpleExoPlayer exoPlayer;
     private Context context;
     private MediaSessionCompat mediaSession;
@@ -74,18 +79,45 @@ public class StepDetailFragment extends Fragment implements ExoPlayer.EventListe
     @Override
     public void setArguments(Bundle args) {
         super.setArguments(args);
-        this.step = (Step) args.getSerializable("step");
+        this.recipe = Parcels.unwrap(args.getParcelable(String.valueOf(R.string.recipeKey)));
+        position = args.getInt(String.valueOf(R.string.positionKey));
+        step = recipe.getSteps().get(position);
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_step_detail, container, false);
         ButterKnife.bind(this,rootView);
         context = getContext();
         detailedDescription.setText(step.getDescription());
         initializeExoPlayer();
         initializeMediaSession();
+
+        prevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (position>0) {
+                    position--;
+                    step = recipe.getSteps().get(position);
+                    releasePlayer();
+                    initializeExoPlayer();
+                    detailedDescription.setText(step.getDescription());
+                }
+            }
+        });
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (position < recipe.getSteps().size()-1){
+                    position++;
+                    step = recipe.getSteps().get(position);
+                    releasePlayer();
+                    initializeExoPlayer();
+                    detailedDescription.setText(step.getDescription());
+                }
+            }
+        });
 
         return rootView;
     }
@@ -150,6 +182,7 @@ public class StepDetailFragment extends Fragment implements ExoPlayer.EventListe
         if (exoPlayer!=null) {
             exoPlayer.stop();
             exoPlayer.release();
+            exoPlayerView.setPlayer(null);
             exoPlayer = null;
         }
     }

@@ -5,4 +5,8 @@
     <string name="prevButton">Previous</string>
     <string name="nextButton">Next</string>
 
+    <!--key to pass objects-->
+    <string name="recipeKey" translatable="false">recipe</string>
+    <string name="positionKey" translatable="false">position</string>
+
 </resources>
