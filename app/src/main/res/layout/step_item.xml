@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/xxmargin"
-    android:paddingBottom="@dimen/xxmargin"
     android:layout_gravity="center"
-    android:elevation="@dimen/xmargin">
-    <TextView
-        android:id="@+id/stepDescriptionTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/Base.Theme.AppCompat"
-        android:textSize="20sp"
-        tools:text="Step Descrption"
-        android:textAlignment="center"
-        />
-
-</LinearLayout>
+    android:textAppearance="@style/Base.Theme.AppCompat"
+    android:textSize="20sp"
+    tools:text="Step Description"
+    android:textAlignment="center"
+    android:id="@+id/stepDescriptionTextView"
+    android:elevation="@dimen/xmargin"
+    android:background="#f1f1f1"/>

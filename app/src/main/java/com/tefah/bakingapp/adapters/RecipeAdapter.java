@@ -1,4 +1,4 @@
-package com.tefah.bakingapp;
+package com.tefah.bakingapp.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.tefah.bakingapp.R;
 import com.tefah.bakingapp.pojo.Recipe;
 
 import java.util.List;

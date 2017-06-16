@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.tefah.bakingapp.adapters.IngredientAdapter;
+import com.tefah.bakingapp.adapters.StepAdapter;
 import com.tefah.bakingapp.pojo.Ingredient;
 import com.tefah.bakingapp.pojo.Recipe;
 import com.tefah.bakingapp.pojo.Step;

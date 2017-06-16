@@ -10,6 +10,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 
+import com.tefah.bakingapp.adapters.RecipeAdapter;
 import com.tefah.bakingapp.pojo.Recipe;
 
 import org.parceler.Parcels;

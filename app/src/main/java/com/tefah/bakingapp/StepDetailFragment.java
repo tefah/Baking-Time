@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,65 +62,76 @@ import butterknife.ButterKnife;
 
 public class StepDetailFragment extends Fragment implements ExoPlayer.EventListener{
 
-    private Recipe recipe;
+    public static Recipe recipe;
     private Step step;
-    private int position;
+    private static int position;
     private SimpleExoPlayer exoPlayer;
     private Context context;
     private MediaSessionCompat mediaSession;
     private PlaybackStateCompat.Builder playbackStateCompat;
 
-    @BindView(R.id.simpleExoPlayerView)  SimpleExoPlayerView exoPlayerView;
-    @BindView(R.id.stepDetailedDescription)  TextView detailedDescription;
-    @BindView(R.id.prev) Button prevButton;
-    @BindView(R.id.next) Button nextButton;
+
+    SimpleExoPlayerView exoPlayerView;
+    TextView    detailedDescription;
+    Button  nextButton;
+    Button  prevButton;
 
     public StepDetailFragment(){}
 
-    @Override
-    public void setArguments(Bundle args) {
-        super.setArguments(args);
-        this.recipe = Parcels.unwrap(args.getParcelable(String.valueOf(R.string.recipeKey)));
+    public static void setVairables(Bundle args) {
+        recipe = Parcels.unwrap(args.getParcelable(String.valueOf(R.string.recipeKey)));
         position = args.getInt(String.valueOf(R.string.positionKey));
-        step = recipe.getSteps().get(position);
     }
 
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_step_detail, container, false);
-        ButterKnife.bind(this,rootView);
+
         context = getContext();
-        detailedDescription.setText(step.getDescription());
-        initializeExoPlayer();
+        exoPlayerView = ButterKnife.findById(rootView, R.id.simpleExoPlayerView);
+
+        if (rootView.findViewById(R.id.stepDetailedDescription)!= null){
+            detailedDescription = ButterKnife.findById(rootView, R.id.stepDetailedDescription);
+            nextButton          = ButterKnife.findById(rootView, R.id.next);
+            prevButton          = ButterKnife.findById(rootView, R.id.prev);
+            prevButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (position > 0) {
+                        position--;
+                        if (getActivity()  instanceof StepDisplayActivity)
+                            ((StepDisplayActivity) getActivity()).setPosition(position);
+                        start();
+                    }
+                }
+            });
+            nextButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (position < recipe.getSteps().size() - 1) {
+                        position++;
+                        if (getActivity()  instanceof StepDisplayActivity)
+                            ((StepDisplayActivity) getActivity()).setPosition(position);
+                        start();
+                    }
+                }
+            });
+        }
+        start();
         initializeMediaSession();
-
-        prevButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (position>0) {
-                    position--;
-                    step = recipe.getSteps().get(position);
-                    releasePlayer();
-                    initializeExoPlayer();
-                    detailedDescription.setText(step.getDescription());
-                }
-            }
-        });
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (position < recipe.getSteps().size()-1){
-                    position++;
-                    step = recipe.getSteps().get(position);
-                    releasePlayer();
-                    initializeExoPlayer();
-                    detailedDescription.setText(step.getDescription());
-                }
-            }
-        });
-
         return rootView;
+    }
+
+    /**
+     * start display for the first time and restart display with new step
+     */
+    private void start(){
+        step = this.recipe.getSteps().get(position);
+        releasePlayer();
+        initializeExoPlayer();
+        if (detailedDescription!= null)
+            detailedDescription.setText(step.getDescription());
     }
 
     /**
@@ -240,7 +252,11 @@ public class StepDetailFragment extends Fragment implements ExoPlayer.EventListe
     public class MySessionCallback extends MediaSessionCompat.Callback {
         @Override
         public void onPlay() {
-            exoPlayer.setPlayWhenReady(true);
+            // for control playing and pausing with headphone
+            if (!exoPlayer.getPlayWhenReady())
+                exoPlayer.setPlayWhenReady(true);
+            else
+                exoPlayer.setPlayWhenReady(false);
         }
 
         @Override
