@@ -1,15 +1,20 @@
-package com.tefah.bakingapp;
+package com.tefah.bakingapp.UIs;
 
 import android.app.LoaderManager;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 
+import com.tefah.bakingapp.IngredientWidgetService;
+import com.tefah.bakingapp.R;
+import com.tefah.bakingapp.RecipesLoader;
 import com.tefah.bakingapp.adapters.RecipeAdapter;
 import com.tefah.bakingapp.pojo.Recipe;
 
@@ -23,6 +28,7 @@ public class MainActivity extends AppCompatActivity
 
     public static final int LOADER_ID   = 1;
     public static final int TABLET_DPI  = 600;
+    public static final String ACTION_CHOOSE_RECIPE = "choose a recipe";
 
     RecyclerView recipesRecyclerView;
     GridLayoutManager layoutManager;
@@ -50,7 +56,6 @@ public class MainActivity extends AppCompatActivity
         recipesRecyclerView.setAdapter(adapter);
 
         getLoaderManager().initLoader(LOADER_ID, null, this);
-
     }
 
     @Override
@@ -70,6 +75,16 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onClick(Recipe recipe) {
+        Intent i = getIntent();
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(this.getString(R.string.preference_recipe_id_key), recipe.getId());
+        editor.commit();
+        if (i.getAction()== ACTION_CHOOSE_RECIPE){
+            IngredientWidgetService.startActionUpdateWidget(this);
+            finish();
+        }
         Intent intent = new Intent(MainActivity.this, RecipeDetailsActivity.class);
         intent.putExtra(String.valueOf(R.string.recipeKey), Parcels.wrap(recipe));
         startActivity(intent);

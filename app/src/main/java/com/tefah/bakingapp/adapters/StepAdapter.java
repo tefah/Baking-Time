@@ -22,7 +22,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepViewHolder
     private OnStepClick clickListner;
 
     public interface OnStepClick{
-        public void onClick(Step step, int position);
+        void onClick(Step step, int position);
     }
 
     public StepAdapter(List<Step> steps, OnStepClick clickListner){

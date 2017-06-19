@@ -8,5 +8,12 @@
     <!--key to pass objects-->
     <string name="recipeKey" translatable="false">recipe</string>
     <string name="positionKey" translatable="false">position</string>
+    <string name="preference_recipe_id_key" translatable="false">recipe id</string>
+
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+
+    <!--empty view widget text-->
+    <string name="empty_view">There is no chosen recipe, Tap to choose one</string>
 
 </resources>

@@ -1,14 +1,12 @@
-package com.tefah.bakingapp;
+package com.tefah.bakingapp.UIs;
 
 import android.content.Intent;
-import android.os.PersistableBundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.FrameLayout;
 
+import com.tefah.bakingapp.R;
 import com.tefah.bakingapp.pojo.Recipe;
-import com.tefah.bakingapp.pojo.Step;
 
 import org.parceler.Parcels;
 
@@ -39,7 +37,7 @@ public class StepDisplayActivity extends AppCompatActivity {
 
         FragmentManager fm = getSupportFragmentManager();
         if (init) {
-            StepDetailFragment  stepDetailFragment = new StepDetailFragment();
+            StepDetailFragment stepDetailFragment = new StepDetailFragment();
             stepDetailFragment.setVairables(args);
             fm.beginTransaction().add(R.id.fragmentContainer, stepDetailFragment).commit();
         }else {

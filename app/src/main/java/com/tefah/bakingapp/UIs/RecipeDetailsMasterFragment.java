@@ -1,4 +1,4 @@
-package com.tefah.bakingapp;
+package com.tefah.bakingapp.UIs;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.tefah.bakingapp.R;
+import com.tefah.bakingapp.UIs.RecipeDetailsActivity;
 import com.tefah.bakingapp.adapters.IngredientAdapter;
 import com.tefah.bakingapp.adapters.StepAdapter;
 import com.tefah.bakingapp.pojo.Ingredient;
