@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity
 
     public static final int LOADER_ID   = 1;
     public static final int TABLET_DPI  = 600;
-    public static final String ACTION_CHOOSE_RECIPE = "choose a recipe";
 
     RecyclerView recipesRecyclerView;
     GridLayoutManager layoutManager;
@@ -75,16 +74,13 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onClick(Recipe recipe) {
-        Intent i = getIntent();
         SharedPreferences sharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(this.getString(R.string.preference_recipe_id_key), recipe.getId());
         editor.commit();
-        if (i.getAction()== ACTION_CHOOSE_RECIPE){
-            IngredientWidgetService.startActionUpdateWidget(this);
-            finish();
-        }
+        IngredientWidgetService.startActionUpdateWidget(this);
+
         Intent intent = new Intent(MainActivity.this, RecipeDetailsActivity.class);
         intent.putExtra(String.valueOf(R.string.recipeKey), Parcels.wrap(recipe));
         startActivity(intent);

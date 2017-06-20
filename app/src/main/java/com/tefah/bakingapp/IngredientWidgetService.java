@@ -5,11 +5,14 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.tefah.bakingapp.pojo.Recipe;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -21,9 +24,10 @@ public class IngredientWidgetService extends IntentService{
 
     public static final String ACTION_UPDATE_RECIPE_WIDGET = "update recipe";
 
-    public IngredientWidgetService(String name) {
-        super(name);
+    public IngredientWidgetService() {
+        super("IngredientWidgetService");
     }
+
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
@@ -39,21 +43,10 @@ public class IngredientWidgetService extends IntentService{
     }
 
     private void handleUpdateRecipeWidget() {
-        List<Recipe> recipes = QueryUtils.getData();
-        Recipe theOne = null;
-        int id = PreferenceManager.getDefaultSharedPreferences(this)
-                .getInt(this.getString(R.string.preference_recipe_id_key), 0);
-        for (Recipe recipe : recipes)
-            if (recipe.getId() == id)
-                theOne = recipe;
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, IngredientWidgetProvider.class));
-        //Trigger data update to handle the GridView widgets and force a data refresh
-//        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_grid_vie);
-        //// TODO: 6/19/2017 notify data set changed here
-        for (int appWidgetId : appWidgetIds) {
-            IngredientWidgetProvider.updateAppWidget(this, appWidgetManager, appWidgetId, theOne);
-        }
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widgetListView);
+        IngredientWidgetProvider.updateIngredientWidgets(this, appWidgetManager, appWidgetIds);
     }
     public static void startActionUpdateWidget(Context context){
         Intent intent = new Intent(context, IngredientWidgetService.class);

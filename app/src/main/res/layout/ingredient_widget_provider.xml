@@ -4,34 +4,29 @@
     android:background="#09C"
     android:padding="@dimen/widget_margin">
 
-    <!--<ListView-->
-        <!--android:id="@+id/widgetListView"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:gravity="center"-->
-        <!--&gt;-->
-
-    <!--</ListView>-->
-
-    <!--<RelativeLayout-->
-        <!--android:id="@+id/emptyView"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/fallTextView"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_centerInParent="true"-->
-            <!--android:text="@string/empty_view"-->
-            <!--android:textSize="20sp"-->
-            <!--android:textStyle="bold|italic"/>-->
-    <!--</RelativeLayout>-->
-
-    <ImageView
-        android:id="@+id/fallTextView"
+    <ListView
+        android:id="@+id/widgetListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:src="@drawable/example_appwidget_preview"/>
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        >
+
+    </ListView>
+
+    <RelativeLayout
+        android:id="@+id/emptyView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/fallTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/empty_view"
+            android:textSize="20sp"
+            android:textStyle="bold|italic"/>
+    </RelativeLayout>
+
+
 </FrameLayout>
