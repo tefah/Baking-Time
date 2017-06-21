@@ -1,20 +1,14 @@
-package com.tefah.bakingapp;
+package com.tefah.bakingapp.widget;
 
 import android.app.IntentService;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.tefah.bakingapp.pojo.Recipe;
-
-import org.parceler.Parcels;
-
-import java.util.List;
+import com.tefah.bakingapp.R;
 
 /**
  * intent service to handle action of the ingredient widget

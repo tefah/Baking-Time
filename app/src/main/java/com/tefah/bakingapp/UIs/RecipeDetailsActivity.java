@@ -27,6 +27,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         recipe =  Parcels.unwrap(intent.getParcelableExtra(String.valueOf(R.string.recipeKey)));
         setContentView(R.layout.activity_recipe_details);
+        setTitle(recipe.getName());
         position = 0;
         if (findViewById(R.id.fragmentContainer)!= null){
             stepDetailFragment = new StepDetailFragment();

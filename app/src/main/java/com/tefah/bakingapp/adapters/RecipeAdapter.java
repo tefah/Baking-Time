@@ -6,10 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.tefah.bakingapp.R;
 import com.tefah.bakingapp.pojo.Recipe;
-
 import java.util.List;
 
 /**

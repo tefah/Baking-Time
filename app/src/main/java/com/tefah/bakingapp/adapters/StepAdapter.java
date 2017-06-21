@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.tefah.bakingapp.R;
 import com.tefah.bakingapp.pojo.Step;
 import java.util.List;
@@ -63,9 +62,6 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepViewHolder
         return steps.size();
     }
 
-    public void setSteps(List<Step> steps){
-        this.steps = steps;
-    }
 
     public class StepViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 

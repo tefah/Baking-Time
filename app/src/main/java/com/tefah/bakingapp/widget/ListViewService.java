@@ -1,4 +1,4 @@
-package com.tefah.bakingapp;
+package com.tefah.bakingapp.widget;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
+
+import com.tefah.bakingapp.QueryUtils;
+import com.tefah.bakingapp.R;
 import com.tefah.bakingapp.pojo.Ingredient;
 import com.tefah.bakingapp.pojo.Recipe;
 import java.util.List;

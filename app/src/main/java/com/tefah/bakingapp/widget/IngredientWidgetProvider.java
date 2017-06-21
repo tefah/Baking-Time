@@ -1,4 +1,4 @@
-package com.tefah.bakingapp;
+package com.tefah.bakingapp.widget;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -10,13 +10,8 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.RemoteViews;
 
+import com.tefah.bakingapp.R;
 import com.tefah.bakingapp.UIs.MainActivity;
-import com.tefah.bakingapp.pojo.Ingredient;
-import com.tefah.bakingapp.pojo.Recipe;
-
-import org.parceler.Parcels;
-
-import java.util.List;
 
 /**
  * Implementation of App Widget functionality.

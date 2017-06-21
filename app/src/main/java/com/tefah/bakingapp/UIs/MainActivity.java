@@ -6,13 +6,17 @@ import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 
-import com.tefah.bakingapp.IngredientWidgetService;
+import com.tefah.bakingapp.IdlingResource.SimpleIdlingResource;
+import com.tefah.bakingapp.widget.IngredientWidgetService;
 import com.tefah.bakingapp.R;
 import com.tefah.bakingapp.RecipesLoader;
 import com.tefah.bakingapp.adapters.RecipeAdapter;
@@ -29,9 +33,20 @@ public class MainActivity extends AppCompatActivity
     public static final int LOADER_ID   = 1;
     public static final int TABLET_DPI  = 600;
 
+    @Nullable
+    private SimpleIdlingResource idlingResource;
+
     RecyclerView recipesRecyclerView;
     GridLayoutManager layoutManager;
     RecipeAdapter adapter;
+
+    @VisibleForTesting
+    @NonNull
+    public SimpleIdlingResource getIdlingResource(){
+        if (idlingResource == null)
+            idlingResource = new SimpleIdlingResource();
+        return idlingResource;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +69,18 @@ public class MainActivity extends AppCompatActivity
         adapter = new RecipeAdapter(this, null, this);
         recipesRecyclerView.setAdapter(adapter);
 
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         getLoaderManager().initLoader(LOADER_ID, null, this);
     }
 
     @Override
     public Loader<List<Recipe>> onCreateLoader(int i, Bundle bundle) {
-        return new RecipesLoader(this);
+        return new RecipesLoader(this, idlingResource);
     }
 
     @Override
