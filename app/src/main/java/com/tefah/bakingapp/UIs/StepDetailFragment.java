@@ -62,7 +62,7 @@ public class StepDetailFragment extends Fragment implements ExoPlayer.EventListe
 
     public StepDetailFragment(){}
 
-    public static void setVairables(Bundle args) {
+    public void setVariables(Bundle args) {
         recipe = Parcels.unwrap(args.getParcelable(String.valueOf(R.string.recipeKey)));
         position = args.getInt(String.valueOf(R.string.positionKey));
     }

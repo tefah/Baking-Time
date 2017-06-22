@@ -11,4 +11,4 @@
     android:textAlignment="center"
     android:id="@+id/stepDescriptionTextView"
     android:elevation="@dimen/xmargin"
-    android:background="#f1f1f1"/>
+    android:background="@color/colorPrimaryDark"/>

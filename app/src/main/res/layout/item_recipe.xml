@@ -7,7 +7,7 @@
     android:padding="@dimen/xxxmargin"
     android:layout_margin="@dimen/xxxmargin"
     android:elevation="@dimen/xmargin"
-    android:background="#f1f1f1"
+    android:background="#BF360C"
     android:id="@+id/recipeNameTextView"
     android:textAlignment="center"
     android:layout_gravity="center"

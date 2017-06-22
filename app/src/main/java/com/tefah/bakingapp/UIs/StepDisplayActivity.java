@@ -24,7 +24,7 @@ public class StepDisplayActivity extends AppCompatActivity {
         if (savedInstanceState!=null){
             recipe      = Parcels.unwrap(savedInstanceState.getParcelable(String.valueOf(R.string.recipeKey)));
             position    = savedInstanceState.getInt(String.valueOf(R.string.positionKey), 0);
-            init        = savedInstanceState.getBoolean("init");
+            init        = savedInstanceState.getBoolean(String.valueOf(R.string.initialKey));
         }else {
             Intent intent = getIntent();
             recipe = Parcels.unwrap(getIntent().getParcelableExtra(String.valueOf(R.string.recipeKey)));
@@ -38,11 +38,11 @@ public class StepDisplayActivity extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
         if (init) {
             StepDetailFragment stepDetailFragment = new StepDetailFragment();
-            stepDetailFragment.setVairables(args);
+            stepDetailFragment.setVariables(args);
             fm.beginTransaction().add(R.id.fragmentContainer, stepDetailFragment).commit();
         }else {
             StepDetailFragment newFragment = new StepDetailFragment();
-            newFragment.setVairables(args);
+            newFragment.setVariables(args);
             fm.beginTransaction().replace(R.id.fragmentContainer, newFragment).commit();
         }
         init = false;
@@ -57,7 +57,7 @@ public class StepDisplayActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         outState.putParcelable(String.valueOf(R.string.recipeKey), Parcels.wrap(recipe));
         outState.putInt(String.valueOf(R.string.positionKey), position);
-        outState.putBoolean("init", init);
+        outState.putBoolean(String.valueOf(R.string.initialKey), init);
         super.onSaveInstanceState(outState);
     }
 

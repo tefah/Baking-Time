@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/appBackground">
 
     <com.google.android.exoplayer2.ui.SimpleExoPlayerView
         android:id="@+id/simpleExoPlayerView"
@@ -32,16 +33,19 @@
         android:id="@+id/prev"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/stepDetailedDescription"
-        app:layout_constraintLeft_toLeftOf="@id/stepDetailedDescription"
-        android:text="@string/prevButton"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="@string/prevButton"
+        android:layout_margin="@dimen/xxmargin"
+        android:background="@color/colorAccent"/>
     <Button
         android:id="@+id/next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/prev"
+        app:layout_constraintBottom_toBottomOf="@id/prev"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="@dimen/xxmargin"
-        android:text="@string/nextButton"/>
+        android:text="@string/nextButton"
+        android:background="@color/colorAccent"/>
 
 </android.support.constraint.ConstraintLayout>

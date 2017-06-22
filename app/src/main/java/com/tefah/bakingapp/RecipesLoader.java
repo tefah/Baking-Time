@@ -3,6 +3,8 @@ package com.tefah.bakingapp;
 import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.tefah.bakingapp.IdlingResource.SimpleIdlingResource;
 import com.tefah.bakingapp.pojo.Recipe;
@@ -18,14 +20,18 @@ public class RecipesLoader extends AsyncTaskLoader<List<Recipe>>{
     List<Recipe> recipes;
     @Nullable
     final SimpleIdlingResource mIdlingResource;
+    ProgressBar loadingIndicator;
 
-    public RecipesLoader(Context context, @Nullable final SimpleIdlingResource idlingResource) {
+    public RecipesLoader(Context context, ProgressBar loadingIndicator,
+                         @Nullable final SimpleIdlingResource idlingResource) {
         super(context);
         mIdlingResource = idlingResource;
+        this.loadingIndicator = loadingIndicator;
     }
 
     @Override
     protected void onStartLoading() {
+        loadingIndicator.setVisibility(View.VISIBLE);
         if (recipes != null)
             deliverResult(recipes);
         else {

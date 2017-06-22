@@ -34,7 +34,7 @@ public class MainActivityTest {
         idlingResource = activityTestRule.getActivity().getIdlingResource();
         Espresso.registerIdlingResources(idlingResource);
     }
-    @Test
+   @Test
     public void clickingRecyclerViewItem_opensRecipeDetailsActivity(){
        // https://guides.codepath.com/android/UI-Testing-with-Espresso#interacting-with-a-recyclerview
         onView(withId(R.id.recipesRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0,click()));

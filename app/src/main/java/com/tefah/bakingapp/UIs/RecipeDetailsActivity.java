@@ -16,7 +16,6 @@ import org.parceler.Parcels;
 public class RecipeDetailsActivity extends AppCompatActivity {
 
     Recipe recipe;
-    private Step step;
     private int position;
 
     StepDetailFragment stepDetailFragment;
@@ -28,10 +27,11 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         recipe =  Parcels.unwrap(intent.getParcelableExtra(String.valueOf(R.string.recipeKey)));
         setContentView(R.layout.activity_recipe_details);
         setTitle(recipe.getName());
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         position = 0;
         if (findViewById(R.id.fragmentContainer)!= null){
             stepDetailFragment = new StepDetailFragment();
-            stepDetailFragment.setArguments(argumentsBundle());
+            stepDetailFragment.setVariables(argumentsBundle());
             FragmentManager fm = getSupportFragmentManager();
             fm.beginTransaction().add(R.id.fragmentContainer, stepDetailFragment).commit();
         }
@@ -40,16 +40,20 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         return recipe;
     }
 
-    public void setStep(Step step, int position) {
-        this.step = step;
+    /**
+     * set the position to be the new position of the chosen step and update the UI
+     * @param position
+     */
+    public void setPosition(int position) {
         this.position = position;
         updateUI();
     }
 
+    // update UI either on tablet replacing fragment or on mobile an launching new activity
     public void updateUI(){
         if (stepDetailFragment!=null){
             StepDetailFragment newFragment = new StepDetailFragment();
-            newFragment.setArguments(argumentsBundle());
+            newFragment.setVariables(argumentsBundle());
             FragmentManager fm = getSupportFragmentManager();
             fm.beginTransaction().replace(R.id.fragmentContainer, newFragment).commit();
         }else {
@@ -70,6 +74,4 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         args.putInt(String.valueOf(R.string.positionKey), position);
         return args;
     }
-    //// TODO: 5/29/2017 implement on save instance to smoothly scroll to the last position
-
 }

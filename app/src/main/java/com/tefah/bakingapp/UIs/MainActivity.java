@@ -14,6 +14,9 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.tefah.bakingapp.IdlingResource.SimpleIdlingResource;
 import com.tefah.bakingapp.widget.IngredientWidgetService;
@@ -26,6 +29,9 @@ import org.parceler.Parcels;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<Recipe>>,
         RecipeAdapter.OnRecipeClick{
@@ -36,9 +42,16 @@ public class MainActivity extends AppCompatActivity
     @Nullable
     private SimpleIdlingResource idlingResource;
 
+    @BindView(R.id.recipesRecyclerView)
     RecyclerView recipesRecyclerView;
+    @BindView(R.id.error_message_tv)
+    TextView errorMessage;
+    @BindView(R.id.loading_indicator)
+    ProgressBar loadingIndicator;
     GridLayoutManager layoutManager;
     RecipeAdapter adapter;
+    LoaderManager loaderManager;
+
 
     @VisibleForTesting
     @NonNull
@@ -52,13 +65,14 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         // http://alvinalexander.com/android/how-to-determine-android-screen-size-dimensions-orientation
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int densityDpi = metrics.densityDpi;
 
-        recipesRecyclerView = (RecyclerView) findViewById(R.id.recipesRecyclerView);
+
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ||
                 densityDpi >= TABLET_DPI){
             layoutManager = new GridLayoutManager(this,3);
@@ -68,24 +82,28 @@ public class MainActivity extends AppCompatActivity
         recipesRecyclerView.setHasFixedSize(true);
         adapter = new RecipeAdapter(this, null, this);
         recipesRecyclerView.setAdapter(adapter);
-
-
+        loaderManager = getLoaderManager();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        getLoaderManager().initLoader(LOADER_ID, null, this);
+        loaderManager.initLoader(LOADER_ID, null, this);
     }
 
     @Override
     public Loader<List<Recipe>> onCreateLoader(int i, Bundle bundle) {
-        return new RecipesLoader(this, idlingResource);
+        return new RecipesLoader(this,loadingIndicator, idlingResource);
     }
 
     @Override
     public void onLoadFinished(Loader<List<Recipe>> loader, List<Recipe> recipes) {
-        adapter.setRecipes(recipes);
+        loadingIndicator.setVisibility(View.GONE);
+        if (recipes!=null){
+            showDataOnScreen();
+            adapter.setRecipes(recipes);
+        }else
+            showErrorMessage();
     }
 
     @Override
@@ -105,5 +123,13 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(MainActivity.this, RecipeDetailsActivity.class);
         intent.putExtra(String.valueOf(R.string.recipeKey), Parcels.wrap(recipe));
         startActivity(intent);
+    }
+    public void showDataOnScreen(){
+        recipesRecyclerView.setVisibility(View.VISIBLE);
+        errorMessage.setVisibility(View.GONE);
+    }
+    public void showErrorMessage(){
+        recipesRecyclerView.setVisibility(View.GONE);
+        errorMessage.setVisibility(View.VISIBLE);
     }
 }

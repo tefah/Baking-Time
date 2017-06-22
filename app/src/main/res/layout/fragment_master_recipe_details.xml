@@ -8,14 +8,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/divider">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/ingredientsRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
-                android:layout_margin="@dimen/xmargin">
+                android:layout_margin="@dimen/xmargin"
+                >
 
             </android.support.v7.widget.RecyclerView>
             <android.support.v7.widget.RecyclerView
