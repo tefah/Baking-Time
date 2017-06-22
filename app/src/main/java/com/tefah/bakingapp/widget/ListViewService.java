@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
-
 import com.tefah.bakingapp.QueryUtils;
 import com.tefah.bakingapp.R;
 import com.tefah.bakingapp.pojo.Ingredient;
@@ -35,7 +34,6 @@ public class ListViewService extends RemoteViewsService {
 
     @Override
     public void onCreate() {
-
     }
 
     @Override

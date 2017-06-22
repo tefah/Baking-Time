@@ -22,10 +22,8 @@ public class IngredientWidgetService extends IntentService{
         super("IngredientWidgetService");
     }
 
-
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-
         switch (intent.getAction()){
             case ACTION_UPDATE_RECIPE_WIDGET:
                 handleUpdateRecipeWidget();
@@ -33,7 +31,6 @@ public class IngredientWidgetService extends IntentService{
             default:
                 Log.i("WIDGET_SERVICE", "invalid action");
         }
-
     }
 
     private void handleUpdateRecipeWidget() {

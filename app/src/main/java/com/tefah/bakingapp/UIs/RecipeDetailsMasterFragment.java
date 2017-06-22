@@ -7,16 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
 import com.tefah.bakingapp.R;
-import com.tefah.bakingapp.UIs.RecipeDetailsActivity;
 import com.tefah.bakingapp.adapters.IngredientAdapter;
 import com.tefah.bakingapp.adapters.StepAdapter;
 import com.tefah.bakingapp.pojo.Ingredient;
 import com.tefah.bakingapp.pojo.Recipe;
 import com.tefah.bakingapp.pojo.Step;
-
 import java.util.List;
 
 /**

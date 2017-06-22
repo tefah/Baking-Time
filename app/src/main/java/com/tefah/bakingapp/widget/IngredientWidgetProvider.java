@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.RemoteViews;
-
 import com.tefah.bakingapp.R;
 import com.tefah.bakingapp.UIs.MainActivity;
 

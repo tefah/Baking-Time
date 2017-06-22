@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import com.tefah.bakingapp.R;
 import com.tefah.bakingapp.pojo.Recipe;
-
 import org.parceler.Parcels;
 
 public class StepDisplayActivity extends AppCompatActivity {
@@ -52,17 +50,11 @@ public class StepDisplayActivity extends AppCompatActivity {
         this.position = position;
     }
 
-
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putParcelable(String.valueOf(R.string.recipeKey), Parcels.wrap(recipe));
         outState.putInt(String.valueOf(R.string.positionKey), position);
         outState.putBoolean(String.valueOf(R.string.initialKey), init);
         super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 }

@@ -5,10 +5,8 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ProgressBar;
-
 import com.tefah.bakingapp.IdlingResource.SimpleIdlingResource;
 import com.tefah.bakingapp.pojo.Recipe;
-
 import java.util.List;
 
 /**

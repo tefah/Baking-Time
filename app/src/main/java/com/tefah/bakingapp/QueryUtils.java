@@ -1,20 +1,15 @@
 package com.tefah.bakingapp;
 
 import android.text.TextUtils;
-import android.util.Log;
-
 import com.tefah.bakingapp.pojo.Ingredient;
 import com.tefah.bakingapp.pojo.Recipe;
 import com.tefah.bakingapp.pojo.Step;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -33,7 +28,6 @@ public class QueryUtils {
         String jsonResponse = "";
         //https://github.com/codepath/android_guides/wiki/Using-OkHttp
         OkHttpClient client = new OkHttpClient();
-
         Request request = new Request.Builder()
                 .url(RECIPE_URL)
                 .build();
@@ -47,7 +41,6 @@ public class QueryUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return jsonResponse;
     }
 
@@ -71,7 +64,6 @@ public class QueryUtils {
 
                 Recipe recipe = new Recipe(id, servings, name, imageUrl, steps, ingredients);
                 recipes.add(recipe);
-
             }
         } catch (JSONException e) {
             e.printStackTrace();

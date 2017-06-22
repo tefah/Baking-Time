@@ -32,12 +32,9 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 import com.tefah.bakingapp.R;
-import com.tefah.bakingapp.UIs.StepDisplayActivity;
 import com.tefah.bakingapp.pojo.Recipe;
 import com.tefah.bakingapp.pojo.Step;
-
 import org.parceler.Parcels;
-
 import butterknife.ButterKnife;
 
 /**
@@ -53,7 +50,6 @@ public class StepDetailFragment extends Fragment implements ExoPlayer.EventListe
     private Context context;
     private MediaSessionCompat mediaSession;
     private PlaybackStateCompat.Builder playbackStateCompat;
-
 
     SimpleExoPlayerView exoPlayerView;
     TextView    detailedDescription;
